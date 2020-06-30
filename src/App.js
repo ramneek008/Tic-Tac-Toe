@@ -16,9 +16,16 @@ const App = () => {
   const [winMessage, setWinMessage] = useState("Circle wins");
 
   const reloadGame = () => {
+    setIsCross(false);
+    setWinMessage("");
+    itemArray.fill("empty", 0,9);
   }
   
   const changeItem = itemNumber => {
+    if(winMessage)
+    {
+      return toast(winMessage, {type:"success"});
+    }
      
     if(itemArray[itemNumber] === "empty")
     {

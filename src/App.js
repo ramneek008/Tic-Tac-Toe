@@ -13,7 +13,7 @@ const itemArray = new Array(9).fill("empty");
 const App = () => {
 
   const [isCross, setIsCross] = useState(false);
-  const [winMessage, setWinMessage] = useState("Circle wins");
+  const [winMessage, setWinMessage] = useState("");
 
   const reloadGame = () => {
     setIsCross(false);
@@ -31,6 +31,7 @@ const App = () => {
     {
       itemArray[itemNumber] = isCross ? "cross" : "circle"
       setIsCross(!isCross);
+      checkWinner();
     }
     else{
       return toast("Already filled", {type:"error"})
@@ -38,7 +39,38 @@ const App = () => {
   }
 
   const checkWinner = () => {
-
+    if(itemArray[0] !== "empty" && itemArray[0] === itemArray[1] && itemArray[1] === itemArray[2])
+    {
+      setWinMessage(itemArray[0] + " wins");
+    }
+    else if(itemArray[3] !== "empty" && itemArray[3] === itemArray[4] && itemArray[4] === itemArray[5])
+    {
+      setWinMessage(itemArray[3] + " wins");
+    }
+    else if(itemArray[6] !== "empty" && itemArray[6] === itemArray[7] && itemArray[7] === itemArray[8])
+    {
+      setWinMessage(itemArray[6] + " wins");
+    }
+    else if(itemArray[0] !== "empty" && itemArray[0] === itemArray[3] && itemArray[3] === itemArray[6])
+    {
+      setWinMessage(itemArray[0] + " wins");
+    }
+    else if(itemArray[1] !== "empty" && itemArray[1] === itemArray[4] && itemArray[4] === itemArray[7])
+    {
+      setWinMessage(itemArray[1] + " wins");
+    }
+    if(itemArray[2] !== "empty" && itemArray[2] === itemArray[5] && itemArray[5] === itemArray[8])
+    {
+      setWinMessage(itemArray[2] + " wins");
+    }
+    if(itemArray[0] !== "empty" && itemArray[0] === itemArray[4] && itemArray[4] === itemArray[8])
+    {
+      setWinMessage(itemArray[0] + " wins");
+    }
+    if(itemArray[2] !== "empty" && itemArray[2] === itemArray[4] && itemArray[4] === itemArray[6])
+    {
+      setWinMessage(itemArray[2] + " wins");
+    }
   }
 
   return (
@@ -58,9 +90,9 @@ const App = () => {
               {isCross ? "Cross" : "Circle"} turn
             </h1>
           )}
-          <div className="grid" onClick={changeItem}>
+          <div className="grid">
             {itemArray.map((item, index) => (
-              <Card>
+              <Card onClick={() => changeItem(index)}>
                 <CardBody className="box">
                   <Icon name={item} />
                 </CardBody>

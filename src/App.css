@@ -2,6 +2,10 @@ body{
   background-color: #000000;
 }
 
+.title{
+  text-decoration: underline;
+}
+
 .grid{
   display:grid;
   grid-template-columns: 1fr 1fr 1fr;
